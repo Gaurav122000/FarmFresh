@@ -1,0 +1,13 @@
+create project folder
+initiate node project (npm init -y)
+create folder structure (mvc = model view controller)
+create server.js
+npm i --save nodemon -D
+create server
+     npm i express
+Run server
+npm i mongoose
+     database connection 
+
+npm i ejs         
+     

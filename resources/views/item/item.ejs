@@ -1,0 +1,383 @@
+<%-include('../partials/header.ejs')-%>
+<style>
+  .price {
+    font-size: xx-large;
+  }
+  .add-to-cart {
+    margin-bottom: -1%;
+    width: 100%;
+    border-radius: 24px;
+  }
+  .form-control {
+    width: 100%;
+  }
+  .container {
+    margin-top: 1%;
+    min-height: 100%;
+    border: 1px solid black;
+  }
+  .title {
+    font-size: xx-large;
+  }
+  .than {
+    background-color: black;
+  }
+  .carousel-item {
+    margin-left: 17%;
+    padding-right: 17%;
+    object-fit: fill;
+  }
+  .carousel-item img {
+    margin-top: 1%;
+    width: 25vw;
+    height: 25vw;
+  }
+  @media (max-width: 576px) {
+    .carousel-item img {
+      margin-top: 1%;
+      width: 100%;
+      height: 40vw;
+    }
+    .carousel-item {
+    object-fit: fill;
+    margin-left: 8.5%;
+  }
+  }
+  .reviewtext{
+      border: 2px solid rgb(12, 15, 224);
+      border-radius: 20px;
+      width: 100%;
+  }
+  .post{
+    margin-bottom: 2%;
+  }
+  <!------------------------rating------------------->
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+   fieldset input {
+     display: none;
+
+   }
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+/* end of Lea's code */
+
+/*
+ * Clearfix from html5 boilerplate
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+#myImg,#myImg1 {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: 24%;
+}
+
+#myImg:hover ,#myImg1:hover
+{opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(247, 242, 242); /* Fallback color */
+  background-color: rgba(255, 251, 251, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin-left: 25%;
+  display: block;
+
+}
+/* Add Animation */
+.modal-content{  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+  #img01,#img02{
+    max-width: 50%;
+    max-height: 50%;
+    
+  }
+}
+</style>
+<% if(items) { %> 
+    <% items.forEach(function(item) { %>
+<div class="container">
+  <div class="header">
+    <div class="row">
+      <div class="col-12">
+        <div
+          id="carouselExampleControls"
+          class="carousel"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="200000">
+              <img id="myImg" src="<%= item.img%>" >
+            </div>
+            <div class="carousel-item" data-bs-interval="200000">
+             <img id="myImg1" src="<%= item.img1%>">
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev"
+          >
+            <span
+              class="carousel-control-prev-icon than"
+              aria-hidden="true"
+            ></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="next"
+          >
+            <span
+              class="carousel-control-next-icon than"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+<!-- tap to zoom -->
+        <div id="myModal" class="modal">
+          <span class="close">&times;</span>
+        <div id="carouselOnZoom" class="carousel carousel-slide " data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="200000">
+                      <img class="modal-content" id="img01" src="<%= item.img%>">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="200000">
+                      <img class="modal-content" id="img02" src="<%= item.img1%>">
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselOnZoom"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon than"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselOnZoom"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon than"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <span class="title"><b><%= item.title %></b></span>
+        <br />
+        <span class="price">&#8377;<%= item.price %></span><br /><br />
+        <button
+          class="add-to-cart btn btn-primary"
+          value="<%= JSON.stringify(item) %>"
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <hr />
+    <div class="description">
+      <h1><b>Description:</b></h1>
+      <%= item.desc %>
+    </div>
+    <hr />
+    <form class="col-12">
+      <h2>Write your review</h2>
+      <input
+        type="text"
+        placeholder="text"
+        name="product-review"
+        class="form-control reviewtext"
+        />
+      <h2>Rate this Product</h2>
+      <div class="row"></div>
+      <fieldset class="rating col" style="width: 40%;">
+        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Very bad">1 star</label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Bad">2 stars</label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Good">4 stars</label>
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="very Good">5 stars</label>
+      </fieldset>
+    </div>
+    <div class="clearfix"></div>
+    <br/>
+      <button class="btn btn-primary post">Post Your Review</button>
+    </form>
+  </div>
+</div>
+<% }) %> 
+<% } else { %>
+<p>no items</p>
+<% } %>
+
+<script>
+  let cartCounter = document.querySelector("#cart");
+
+  function updateCart(product) {
+    axios
+      .post("/update-cart", product)
+      .then((res) => {
+        cartCounter.innerText = res.data.totalQty;
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+  }
+
+  addToCart = document.querySelectorAll(".add-to-cart");
+  addToCart.forEach(function (btn) {
+    btn.addEventListener("click", () => {
+      console.log(btn.value);
+      let product = JSON.parse(btn.value);
+      updateCart(product);
+    });
+  });
+  // Get the modal
+var modal = document.getElementById("myModal");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var img1 = document.getElementById("myImg1")
+var modalImg = document.getElementById("img01");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+}
+var modalImg1 = document.getElementById("img02");
+img1.onclick = function(){
+  modal.style.display = "block";
+  modalImg1.src = this.src;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+
+</script>

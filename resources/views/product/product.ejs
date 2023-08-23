@@ -1,0 +1,148 @@
+<%-include('../partials/header.ejs')-%>
+
+<link rel="stylesheet" href="\styles\product.css">
+
+<body>
+  <div class="Filter shadow-lg">
+    <a href="/category/veg/get?q=Veggies"><button>Vegetabels</button></a>
+    <a href="/category/fruits/get?q=Fruit"><button>Fruits</button></a>
+    <a href="/category/dairy/get?q=Dairy"><button>Dairy</button></a>
+    <a href="/category/non-veg/get?q=Non"><button>Non-veg</button></a>
+  </div>
+  <div class="container">
+      <div class="row product">
+        <div class="col-xl-2 custom">
+          <div class="section">
+               <ul class="list-group">
+                   <a href="#"><li class="list-group-item"><h5>Refine Results</h5></li></a>
+                   <a href="/category/veg/get?q=Veggies"><li class="list-group-item">Vegetabels</li></a>
+                   <a href="/category/fruits/get?q=Fruit"><li class="list-group-item">Fruits</li></a>
+                   <a href="/category/dairy/get?q=Dairy"><li class="list-group-item">Dairy Products</li></a>
+                   <a href="/category/non-veg/get?q=Non"><li class="list-group-item">Non-Veg</li></a>
+                 </ul>
+         </div>
+        </div> 
+        <div class="col-lg-12 col-xl-10">
+            <div class="section-right-1  align="right">
+              <div class="row">
+                <% if(items) { %>
+                  <% items.forEach(function(item) { %>
+                    <div class="col-sm-6 col-lg-4" >
+                      <div class="card">
+                        <a href="/category/product/item?q=<%= item.title %>"
+                          ><img src="<%= item.img%>" alt="" class="card-img-top"
+                        /></a>
+                        <div class="card-body">
+                          <h5 class="card-title text-truncate"><%= item.title %></h5>
+                          <p class="card-text">&#8377;<%= item.price %></p>
+                          <button class="add-to-cart btn btn-primary Cart" value="<%= JSON.stringify(item) %>">Add to cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                          <!-- <a href="#" class="btn btn-primary Cart">Add to cart </a> -->
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %> 
+                <% } else { %>
+                <p>no items</p>
+                <% } %>
+              </div>
+            </div>
+            <!-- for small -->
+            <div class="section-right-2">
+              <div class="row">
+                <% if(items) { %>
+                  <% items.forEach(function(item) { %>
+                    <div class="col-sm-12 " >
+                      <div class="card mb-3">
+                        <div class="row g-0">
+                          <div class="col-4">
+                            <a href="/category/product/item?q=<%= item.title %>"
+                              ><img src="<%= item.img%>" alt="" class="card-img-top"
+                            /></a>
+                          </div>
+                          <div class="col-8">
+                            <div class="card-body">
+                              <h5 class="card-title "><%= item.title %></h5>
+                              <p class="card-text">&#8377;<%= item.price %></p>
+                              <a href="#" class="btn btn-primary Cart">Add to cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %> 
+                <% } else { %>
+                <p>no items</p>
+                <% } %>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div> 
+</body>
+<footer>
+  <div align=right>
+    <%-include('../ChatBot/index.html')-%>
+  </div>
+</footer>
+
+<script>
+  let cartCounter = document.querySelector('#cart')
+
+      function updateCart(product) {
+          axios.post('/update-cart', product).then(res => {
+           cartCounter.innerText = res.data.totalQty;
+          }).catch(err => {
+              console.log("Error")
+          })
+      }
+
+      addToCart = document.querySelectorAll('.add-to-cart')
+      addToCart.forEach(function (btn) {
+          btn.addEventListener('click', () => {
+              console.log(btn.value);
+              let product = JSON.parse(btn.value)
+              updateCart(product)
+          })
+      })
+</script> 
+
+
+
+
+
+
+
+<!-- <% if(items) { %>
+    <% items.forEach(function(item) { %>
+        <div>
+            <a href="/category/product/item?q=<%= item.title %>"><img src="<%= item.img%>" alt=""></a>
+            <%= item.title %>
+            <%= item.price %>
+        </div>
+        <button class="add-to-cart" value="<%= JSON.stringify(item) %>">add to cart</button>
+        <br>
+    <% }) %>
+    <% } else { %>
+        <p>no items</p>
+        <% } %>
+
+<script>
+    let cartCounter = document.querySelector('#cart')
+
+        function updateCart(product) {
+            axios.post('/update-cart', product).then(res => {
+             cartCounter.innerText = res.data.totalQty;
+            }).catch(err => {
+                console.log("Error")
+            })
+        }
+
+        addToCart = document.querySelectorAll('.add-to-cart')
+        addToCart.forEach(function (btn) {
+            btn.addEventListener('click', () => {
+                console.log(btn.value);
+                let product = JSON.parse(btn.value)
+                updateCart(product)
+            })
+        })
+</script>     -->

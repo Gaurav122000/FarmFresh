@@ -1,0 +1,153 @@
+<%-include('./partials/header.ejs')-%>
+<link rel="stylesheet" href="\styles\cart.css">
+<body>
+    <div class="container">
+        <%if(!session.cart){%>
+            <div style="text-align: center;">
+                <img src="pictures\empty-cart1.gif" alt="" >
+                
+                <h4>you don't have any items in your cart</h4>
+                <h5 style="color: grey;">your favourite items are just a click away</h5>
+                <a href="/"><button class="btn btn-outline-success">Start Shoping</button></a>
+            </div>
+            <%} else { %>
+     
+                <% for(let product of Object.values(session.cart.items)) { %>
+                    <div class="col-sm-12 mt-2">
+                        <div class="card shadow-lg">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<%= product.item.img %>" alt="" class="cart-img">
+                                    </div>
+                                <div class="col-10">
+                                    <h3 ><%= product.item.title %></h3>
+                                     &#8377;<%= product.item.price %>
+                                    <br>
+                                    qty = <%= product.qty %>
+                                    total = ₹ <%= product.item.price * product.qty %>
+                                    <br>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Qty
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="Qty">
+                                          <li class="dropdown-item" value="1" href="#">1</li>
+                                          <li class="dropdown-item" value="2" href="#">2</li>
+                                          <li class="dropdown-item" value="3" href="#">3</li>
+                                          <li class="dropdown-item" value="4" href="#">4</li>
+                                          <li class="dropdown-item" value="5" href="#">5</li>
+                                          <li class="dropdown-item" value="6" href="#">6</li>
+                                        </ul>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <br/>
+                    <div class="g-total shadow-lg" align="center">
+                        <p >
+                        Grand Total =₹<p id="Total"><%= session.cart.totalPrice %></p>
+                        </p>
+                        <!-- <button class="mb-3 btn btn-outline-success">Check Out</button> -->
+                        <button id="rzp-button1" class="mb-3 btn btn-outline-success">Check Out</button>
+                        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                    </div>
+                <% } %>
+    </div>
+</body>
+<footer>
+    <div align=right>
+      <%-include('./ChatBot/index.html')-%>
+    </div>
+  </footer>
+<script>
+   /*  var quantity= document.getElementById("Qty");
+    function totalQty(){
+    //   var price = document.ul[0].ddlViewBy.value;
+      var totalPrice = quantity.li[Qty.selectedIndex].value; 
+      console.log(price, totalPrice);
+    }
+    quantity.onchange=totalQty;
+    totalQty(); */
+</script>
+
+<script>
+    /* genrate order */
+    var orderId ;
+    $(document).ready(function(){
+        var settings = {
+            "url": "/create/orderId",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "amount": "20"
+             }),
+        };
+
+        //creates new orderId everytime
+        $.ajax(settings).done(function (response) {
+            orderId=response.orderId;
+            console.log(orderId);
+            $("button").show();
+        });
+    });
+</script>
+<script>
+    document.getElementById('rzp-button1').onclick = function(e){
+       /*  alert('hello') */
+        var options = {
+        "key": "rzp_test_gP8r9l9kO7tgvL", // Enter the Key ID generated from the Dashboard
+        "amount": Number(document.getElementById('Total').innerText)*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Farm Fresh",
+        "description": "Payment Portal",
+        "image": "https://user-images.githubusercontent.com/100744516/169679673-cb7ee729-6268-47fe-b930-45284e124c04.png",
+       /*  "order_id": "order_IluGWxBm9U8zJ8", */ //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+            /* alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature) */
+
+            /* call signature validation method */
+    
+            var settings = {
+                "url": "/api/payment/verify",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({response}),
+            }
+            
+             //create new orderid everytime
+            $.ajax(settings).done(function (response) {
+                 alert(JSON.stringify(response))
+            });
+        },
+            "theme":{
+                "color": "#3399cc"
+            }
+        }
+        var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+           /*  alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id); */
+            alert('failed')
+        })
+
+        rzp1.open()
+        e.preventDefault()
+
+    }
+</script>
+

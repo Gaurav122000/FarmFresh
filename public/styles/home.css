@@ -1,0 +1,117 @@
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+      body {
+        background-color: #fffdd0;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        overflow-x: hidden;
+      }
+
+      #twitter {
+        margin-top: 3px;
+      }
+
+      carousel-control-prev-icon {
+        justify-content: start;
+      }
+
+      h5 {
+        justify-content: flex-start;
+        background-color: transparent;
+        border-bottom: 2em #e2f595;
+      }
+
+      #carousel {
+        background-color: #273032;
+        min-width: 60%;
+      }
+
+      #gif {
+        background-color: transparent;
+      }
+
+      .card-img-top {
+        transition: all 1s ease;
+      }
+
+      .card-img-top:hover {
+        transform: scale(1.25);
+      }
+
+      .card {
+        overflow: hidden;
+      }
+
+      .catog img {
+        max-height: 15em;
+        transition: 0.5s ease-in-out;
+        object-fit: cover;
+        border-radius: 50px;
+      }
+
+      hr {
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 5px solid rgb(12, 1, 1);
+      }
+
+      .card-body {
+        background-color: #273032;
+        color: antiquewhite;
+      }
+
+      .catog {
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+        margin-bottom: 2em;
+        position: relative;
+        display: flex;
+        object-fit: cover;
+        border-radius: 50px;
+        overflow: hidden;
+        transition: 1s;
+      }
+
+      .catog:hover {
+        transform: translateY(20px);
+      }
+
+      .middle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        background: linear-gradient(to bottom,
+            rgba(0, 176, 155, 0.5),
+            rgba(150, 201, 61, 1));
+        transition: 0.5s ease;
+        opacity: 0;
+      }
+
+
+      /* 2 card */
+      .middle button {
+        border-radius: 10px;
+        background-color: lightgreen;
+        color: black;
+        font-size: 20px;
+        padding: 15px 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+      }
+
+      .catog:hover .middle {
+        opacity: 1;
+      }
+
+      .catog:hover img {
+        transform: scale(1.1);
+      }

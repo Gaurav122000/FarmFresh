@@ -1,0 +1,105 @@
+<%-include('../partials/header.ejs')-%>
+
+    <link rel="stylesheet" href="\styles\login.css"> 
+
+    <body onload="myFunction()">
+
+        <img src="pictures\login-background.png" alt="">    
+
+        <!-- login button -->
+        <i data-bs-toggle="modal" id="myCheck" data-bs-target="#myModal" style="display: none;"> Login </i>
+        <script>
+            function myFunction() {
+              document.getElementById("myCheck").click();
+            }
+        </script>
+        <!-- The Modal -->
+        <div class="modal" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            <img src="pictures\farm-fresh logo.png" class="modal-title img-fluid" alt="Avatar"
+                                class="avatar" />
+                        </h4>
+                        <a href="/" class="btn-close" ></a><!-- kross button -->
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form>
+                            <div class="container" id="#Lf">
+                                <label for="mobile"><b>Mobile No.</b></label>
+                                <br>
+                                <input type="text" placeholder="Mobile no." id="mobile" name="mobile" required />
+
+                                <label for="password"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" id="password" required />
+                                <p>Don't have an account?<a href="/register" style="font-weight: bold;"> Register now</a></p>
+                                <p id="alert" style="display: none">All fields are required
+                                    <!-- except email e -->
+                                </p>
+
+                                <button id="postlogin" type="submit">Log in</button>
+                                <label>
+                                    <!-- <input type="checkbox" checked="checked" name="remember" />Remember me</label> -->
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <div class="container">
+                            <a href="/" type="button"class="btn cancelbtn">Cancel</a>
+                            <span class="psw"><a href="#">Forgot password?</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        /* // Get the modal
+        var modal = document.getElementById("id01");
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        } */
+        //for checking problem
+        const postlogin = document.querySelector('#postlogin');
+        postlogin.addEventListener('click', () => {
+            const mobile = document.getElementById('mobile').value
+            const password = document.getElementById('password').value
+            console.log(mobile, password)
+            if (!mobile || !password) {
+                document.getElementById('alert').style.display = 'block';
+                document.getElementById('alert').innerText = "You have been Login successfully"
+            } else {
+                axios.post('/login', { mobile: mobile, password: password }).then(res => {
+                    if (res.data.success) {/* if data match */
+                        location.replace("http://localhost:3000/")/* for redirecting to home page */
+                    } else if (res.data.mismatch) {/* if password didn't match */
+                        document.getElementById('alert').style.display = 'block';
+                        document.getElementById('alert').innerText = "invalid password"
+                    } else if (res.data.noexist) {/* if user does not exist */
+                        document.getElementById('alert').style.display = 'block';
+                        document.getElementById('alert').innerText = "User does not exist"
+                    } else if (res.data.empty) {/* if fields are empty */
+                        document.getElementById('alert').style.display = 'block';
+                        document.getElementById('alert').innerText = "Please enter mobile no. & password "
+                    } else {
+                        document.getElementById('alert').style.display = 'block';
+                        document.getElementById('alert').innerText = "Something went wrong"
+                    }
+                }).catch(err => {
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = "Something went wrong in server"
+                })
+            }
+        })
+    </script>

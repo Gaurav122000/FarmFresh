@@ -1,0 +1,273 @@
+<!-- for nav bar -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- bootstrap js\bundels link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Farm Fresh</title>
+    <!-- axios link from cdnjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"
+        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- proper js link -->
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="\styles\header.css">
+</head>
+
+<body>
+     <!-- bootstap nav bar -->
+     <div class="Sticky">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273032;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><img src="\pictures\farm-fresh logo.png" alt="Farm Fresh"></a>
+                
+                <form action="/search/query" method="POST"  class="d-flex">
+                    <input class="form-control search-bar " id="query" type="text" placeholder="Search" name="query"
+                        aria-label="Search" required>
+                       
+                <button class="btn btn-success nav-item search-bar-btn"  id="search" type="submit"><i class="fa fa-search"></i></button>
+                <script>
+                    btn = document.getElementById('search')
+                    btn.addEventListener('click',(e)=>{
+                        let query = document.getElementById('query').value;
+                        axios.post('/search/query',{query:query}).then(res =>{
+                            console.log(res.data.success)
+                        }).catch(error =>{
+                            console.log(error)
+                        })
+                    })
+                </script>                        
+                </form>
+                <!-- <div class="cartm" align="right">
+                    <a href="/cart"><label for="cart" id="cart"><img  src="pictures\cart icon.png" alt="" width="60px" height="47"></label></a>
+                    <a href="/cart"><label for="cart" class="label" id="cart"><%= session.cart ? session.cart.totalQty : 0 %></label></a>
+                </div> -->
+                <div  id="navbarSupportedContent">
+                    <!-- for profile dropdown  -->    
+                    <ul class="navbar-nav mx-auto mb-2 mb-md-0 ">
+                        <% if(user) { %>
+                              <a class="profile nav-item mx-md-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
+                                <!-- <img class="user" id="offcanvasWithBackdropLabel" src="\pictures\profile.png"> -->
+                                <div id="offcanvasWithBackdropLabel" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item  user active" data-bs-interval="20000000">
+                                            <img src="\pictures\profile.png" class=" user d-block w-100" alt="...">
+                                          </div>
+                                      <div class="carousel-item  user " id="1" data-bs-interval="20000000">
+                                        <img src="\pictures\boy.png" class=" user d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item user " id="2" data-bs-interval="20000000">
+                                        <img src="\pictures\men.png" class="user d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item  user" id="3" data-bs-interval="20000000">
+                                        <img src="\pictures\girl.png" class="user d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item  user" id="4" data-bs-interval="20000000">
+                                        <img src="\pictures\women.png" class="user d-block w-100" alt="...">
+                                      </div>
+                                    </div>
+                                  </div>
+                              </a>
+                              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+                                <div class="offcanvas-header" align="center">
+                                  <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">
+                                  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item user active" data-bs-interval="20000000">
+                                            <img src="\pictures\profile.png" class=" user d-block w-100" alt="...">
+                                          </div>
+                                      <div class="carousel-item user" id="5" data-bs-interval="20000000">
+                                        <img src="\pictures\boy.png" class=" user d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item user " id="6" data-bs-interval="20000000">
+                                        <img src="\pictures\men.png" class="user d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item user " id="7" data-bs-interval="20000000">
+                                        <img src="\pictures\girl.png" class="user d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item user " id="8" data-bs-interval="20000000">
+                                        <img src="\pictures\women.png" class="user d-block w-100" alt="...">
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <!-- <img class="user" src="\pictures\profile.png"> -->
+                                    <button id="Avatar"><i class="fa fa-pencil"  aria-hidden="true"></i></button>    
+                                    <br>                            
+                                    <b>Hello  <%= user.firstName %>  <%= user.lastName %></b>
+                                  </h5>
+                                </div>
+                                        <div id="changeAvatar" align="center">
+                                            <button onclick="boy()"><img class="avatar" src="\pictures\boy.png"></button>
+                                            <button onclick="men()"><img class="avatar" src="\pictures\men.png"></button>
+                                            <button onclick="girl()"><img class="avatar" src="\pictures\girl.png"></button>
+                                            <button onclick="women()"><img class="avatar" src="\pictures\women.png"></button>
+                                        </div>
+                                <hr/>
+                                <div class="offcanvas-body" align="left">
+                                    <i class="btn" id="flip">Search by Catogeries</i>
+                                    <div id="panel">
+                                        <div class="panel">
+                                            <a href="/category/dairy/get?q=Dairy">Dairy</a>
+                                        </div>
+                                        <div class="panel">
+                                            <a href="/category/fruits/get?q=Fruit">Fruits</a>
+                                        </div>
+                                        <div class="panel">
+                                            <a href="/category/veg/get?q=Veggies">Vegetabels</a>
+                                        </div>
+                                        <div class="panel">
+                                            <a href="/category/non-veg/get?q=Non Veg">Non-Veg</a>
+                                        </div>
+                                    </div> 
+                                    
+                                    <i><a class="btn  cart" href="/cart">Cart</a></i>
+                                    <div class="footer">
+                                      <a href="/logout"><button class="btn btn-danger logout">Logout</button></a>
+                                    </div>
+                                   
+                                </div>
+                              </div>
+                        <% } else { %>
+    
+                        <li class="nav-item login">
+                            <a class="nav-link active " aria-current="page" href="/login"><button type="button"
+                                    class="btn p-2 px-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Login
+                                </button></a>
+                        </li>
+    
+                        <% } %>
+                        <ul class="navbar-nav logo mb-2 mb-md-0">
+                        <li class="nav-item icon"> 
+                            <a class="nav-link" href="https://www.instagram.com/ "> <img  src="\pictures\icons\instagram.png" width="40px" alt="instagram"></a>
+                        </li>
+                        <li class="nav-item icon">
+                            <a class="nav-link" href="https://www.facebook.com/"><img  src="\pictures\icons\facebook.png" width="40px" alt="facebook"></a>
+                        </li>
+                        <li class="nav-item icon">
+                            <a class="nav-link" href="https://twitter.com/"><img  src="\pictures\icons\twitter.png" width="40px" alt="twitter"></a>
+                        </li>
+                    </ul>
+                        <div class="nav-item icon cartm">
+                            <a href="/cart"><label ><img  src="\pictures\cart icon.png" alt="" width="60px" height="47"></label></a>
+                            <a href="/cart"><label for="cart" class="label" id="cart" ><%= session.cart ? session.cart.totalQty : 0 %></label></a>
+                            <!-- <a href="#"> LogOut</a> -->
+                        </div>
+                    </ul>
+                
+                </div>
+            </div>
+        </nav>
+     </div> 
+</body>
+
+</html>
+<script>
+  function boy() {
+   var element = document.getElementById("1");
+   element.classList.add("active");
+   var element = document.getElementById("2");
+  element.classList.remove("active");
+  var element = document.getElementById("3");
+  element.classList.remove("active");
+  var element = document.getElementById("4");
+  element.classList.remove("active");
+
+  var element = document.getElementById("5");
+   element.classList.add("active");
+   var element = document.getElementById("6");
+  element.classList.remove("active");
+  var element = document.getElementById("7");
+  element.classList.remove("active");
+  var element = document.getElementById("8");
+  element.classList.remove("active");
+}
+function men() {
+   var element = document.getElementById("2");
+   element.classList.add("active");
+   var element = document.getElementById("1");
+  element.classList.remove("active");
+  var element = document.getElementById("3");
+  element.classList.remove("active");
+  var element = document.getElementById("4");
+
+  element.classList.remove("active");
+  var element = document.getElementById("6");
+   element.classList.add("active");
+   var element = document.getElementById("5");
+  element.classList.remove("active");
+  var element = document.getElementById("7");
+  element.classList.remove("active");
+  var element = document.getElementById("8");
+  element.classList.remove("active");
+}
+function girl() {
+   var element = document.getElementById("3");
+   element.classList.add("active");
+   var element = document.getElementById("1");
+  element.classList.remove("active");
+  var element = document.getElementById("2");
+  element.classList.remove("active");
+  var element = document.getElementById("4");
+  element.classList.remove("active");
+
+  var element = document.getElementById("7");
+   element.classList.add("active");
+   var element = document.getElementById("5");
+  element.classList.remove("active");
+  var element = document.getElementById("6");
+  element.classList.remove("active");
+  var element = document.getElementById("8");
+  element.classList.remove("active");
+}
+function women() {
+   var element = document.getElementById("4");
+   element.classList.add("active");
+   var element = document.getElementById("1");
+  element.classList.remove("active");
+  var element = document.getElementById("2");
+  element.classList.remove("active");
+  var element = document.getElementById("3");
+
+  element.classList.remove("active");
+  var element = document.getElementById("8");
+   element.classList.add("active");
+   var element = document.getElementById("5");
+  element.classList.remove("active");
+  var element = document.getElementById("6");
+  element.classList.remove("active");
+  var element = document.getElementById("7");
+  element.classList.remove("active");
+}
+localStorage.setItem('boy', boy());
+localStorage.setItem('men', men());
+localStorage.setItem('girl', girl());
+localStorage.setItem('women', women());
+    $(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideToggle("slow");
+  });
+});
+$(document).ready(function(){
+  $("#Avatar").click(function(){
+    $("#changeAvatar").slideToggle("slow");
+  });
+});
+
+</script>

@@ -1,0 +1,138 @@
+<!-- <div class="d-flex justify-content-center">
+        <div>
+            <div class="mb-1">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" required>
+            </div>
+            <div class="mb-1">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" required>
+            </div>
+            <div class="mb-1">
+                <label for="mobile" class="form-label">Mobile Number</label>
+                <input type="number" class="form-control" id="mobile" name="mobile" required>
+            </div>
+            <div class="mb-1">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="mb-1">
+                <label for="cpassword" class="form-label">Confirm Password</label>
+                <input type="cpassword" class="form-control" id="cpassword" required>
+            </div>
+            <p id="alert" style="display: none">All fields are required</p>
+            <button id="postregister" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div> -->
+
+<head>
+<link rel="stylesheet" href="\styles\registration.css">
+</head>
+
+<body onload="myFunction()">
+    <%-include('../partials/header.ejs')-%>
+
+        <button data-bs-target="#singinpopup" id="myCheck" data-bs-toggle="modal" data-bs-dismiss="modal"
+            style="display: none;">Register now</button>
+        <script>
+            function myFunction() {
+                document.getElementById("myCheck").click();
+            }
+        </script>
+
+        <div class="modal fade" id="singinpopup" aria-hidden="true" aria-labelledby="singinpopupLabel"
+            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="singinpopupLabel"><img src="pictures\farm-fresh logo.png"
+                                class="modal-title img-fluid" alt="Avatar" class="avatar" /></h5>
+                        <a href="/login" class="btn-close"></a>
+                    </div>
+                    <div class="modal-body">
+                            <div class="container" id="#Lf">
+                                <label for="fname">First Name</label>
+                                <input type="text" id="fname" name="fname" placeholder="First Name" required>
+                                <label for="lname">Last Name</label>
+                                <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+                                <label for="mobile">Mobile Number</label>
+                                <input type="number" id="mobile" name="mobile" placeholder="Mobile No." required>
+                                <label for="password">Password</label>
+                                <input type="password" id="password" placeholder="Password" required>
+                                <label for="password">Confirm Password</label>
+                                <input type="password" id="cpassword" placeholder="Confirm Password" required>
+                                <p>Alredy have an account?    
+                                    <a href="/login" style="text-decoration: none;
+                                    color: yellowgreen;font-weight: bold;">Login</a>
+                                </p>
+                                <p id="alert" style="display: none;color: red;font-weight: bold;">All fields are required</p>
+                                <button id="postregister" type="submit" class="btn btn-primary">Signin</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+<script>
+
+    const postregister = document.querySelector('#postregister');
+    postregister.addEventListener('click', () => {
+        //ajx call
+        //we bring data by ajx call
+        const fname = document.getElementById('fname').value;
+        const lname = document.getElementById('lname').value;
+        const mobile = document.getElementById('mobile').value;
+        /*  const email = document.getElementById('email').value;e */
+        const password = document.getElementById('password').value;
+        const cpassword = document.getElementById('cpassword').value;
+        /* below code for checking if feilds are empty*/
+        /* if feild are empty */
+        if (!fname || !lname || !mobile || !password || !cpassword) {
+            document.getElementById('alert').style.display = 'block';
+        }/* if feild are not empty */
+
+        if (password == cpassword) {/* if password are not matching */
+            //we send data through json eg - fname:fname - key:value - server:local
+            axios.post('/register', { fname: fname, lname: lname, mobile: mobile, /* email: email,e */ password: password, cpassword: cpassword }).then((res) => {/* then execute when we get data from server */
+
+                if (res.data.success) {/* if operation success */
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = "You have been registered successfully"
+                    document.getElementById('fname').value = " "
+                    document.getElementById('lname').value = " "
+                    /* document.getElementById('email').value = " "e */
+                    document.getElementById('mobile').value = " "
+                    document.getElementById('password').value = " "
+                    document.getElementById('cpassword').value = " "
+                    setTimeout(()=>{
+                        location.replace("http://localhost:3000/login")
+                        /* document.getElementById("loader").style.display = "none" */
+                    }, 2500);
+                } else if (res.data.error) {/* if we get any error */
+                    document.getElementById('alert').style.display = 'block';
+                } else if (res.data.mismatch) {/* if password data mismatch */
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = res.data.mismatch
+                } else if (res.data.mobile) {/* if mobile number exist */
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = res.data.mobile
+                    document.getElementById('mobile').value = " "
+                } else {/* if anything happen other then it */
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = "Something went wrong"
+                }
+
+            }).catch(err => {/* if no resoponse come from server */
+                document.getElementById('alert').style.display = 'block';
+                document.getElementById('alert').innerText = "Something went wrong in server"
+            })
+        }
+        else {/* if password are not matching */
+            document.getElementById('alert').style.display = 'block';
+            document.getElementById('alert').innerText = "Passwords are Mismatching"
+        }
+
+    })
+
+</script>

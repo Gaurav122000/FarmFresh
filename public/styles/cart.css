@@ -1,0 +1,24 @@
+    body{
+        overflow-x: hidden;
+    }
+    .cart-img{
+        min-width: 100px;
+        max-width: 100%;
+        height: auto;
+        
+    }
+    .card{
+        background-color: #fffdd0;
+    }
+    .g-total{
+        background-color: #fffdd0;
+        width: 100%;
+        height: auto;
+        font-size: x-large;
+
+    }
+   
+    .dropdown ul{
+        width: 15px;
+    }
+

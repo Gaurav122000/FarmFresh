@@ -1,0 +1,197 @@
+<%-include('../partials/header.ejs')-%>
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <title>FarmFresh</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="\styles\home.css">
+  </head>
+
+  <body>
+    <!----------------- car----------------------->
+    <!-- carousel  -->
+    <div class="container-fluid px-3 py-3" style="height: 60%; width: 90%; position: center; ">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" style="border: solid 4px black;">
+          <div class="carousel-item active">
+            <!-- <img src="images/01.jpeg" class="d-block w-100" alt="..."> -->
+            <video autoplay muted loop src="pictures/1-add-1c.mp4" type="video" class="d-block w-100"></video>
+          </div>
+          <div class="carousel-item">
+            <!-- <img src="images/02.jpeg" class="d-block w-100" alt="..."> -->
+            <video autoplay muted loop src="pictures/2-add-1c.mp4" type="video" class="d-block w-100"></video>
+          </div>
+          <div class="carousel-item">
+            <!-- <img src="images/04.jpeg" class="d-block w-100" alt="..."> -->
+            <video autoplay muted loop src="pictures/3-add-1c.mp4" type="video" class="d-block w-100"></video>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <!---------------------1 card---------------------------------------------->
+    <h3 style="text-align: center; margin-top: 20px;">Best Deal's</h3>
+    <hr />
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+          <div class="card shadow-lg mb-4">
+            <img src="pictures\2,1 card.gif" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Onion</h5>
+              <p class="card-text  text-truncate">Buy onions at a cheap price</p>
+              <a href="/category/product/item?q=Onion (500 gram)" class="btn btn-primary">Shop now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+          <div class="card shadow-lg mb-4">
+            <img src="pictures\2,2 card.gif" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Pineapple</h5>
+              <p class="card-text text-truncate">
+                Buy pineapple at a cheap price</p>
+              <a href="/category/product/item?q=Pineapple" class="btn btn-primary">Shop now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-lg-3 col-md-3 col-sm-6 col-6">
+          <div class="card shadow-lg mb-4">
+            <img src="pictures\2,3 card.gif" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Paneer</h5>
+              <p class="card-text  text-truncate">
+                Buy Paneer at a cheap price
+              </p>
+              <a href="/category/product/item?q=Mother Dairy Paneer (200 gram)" class="btn btn-primary">Shop now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+          <div class="card shadow-lg mb-4">
+            <img src="pictures\2,4 card.gif" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Chicken leg</h5>
+              <p class="card-text text-truncate">
+                Buy chicken leg at a cheap price
+              </p>
+              <a href="/category/product/item?q=Chicken Leg Peice" class="btn btn-primary">Shop now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-----------------2car---------------------------------------------->
+    <h3 class="shadow-none p-2" style="text-align: center;">Today's offer</h3>
+    <hr class="shadow-lg" />
+    <div class="container shadow-lg p-3 mb-5" id="carousel">
+      <div id="ss" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#ss" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#ss" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#ss" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="6000">
+            <a href="/category/product/item?q=Apple">
+              <img class="d-block w-100" src="pictures\apple-sale-2c.png" alt="Today's offer" />
+            </a>
+          </div>
+          <div class="carousel-item" data-bs-interval="6000">
+            <a href="/category/product/item?q=Coconut Water">
+              <img class="d-block w-100" src="pictures\coconut-sale-2c.png" alt="Today's offer" />
+            </a>
+          </div>
+          <div class="carousel-item" data-bs-interval="6000">
+            <a href="/category/product/item?q=Egg (1 Dozen)">
+              <img class="d-block w-100" src="pictures\egg-sale-2c.png" alt="Today's offer" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#ss" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#ss" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-----------------------2card---------------------------------------------------->
+    <h3 class="shadow-none" style="text-align: center;">Categories</h3>
+    <hr class="shadow-lg" />
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col catog ">
+          <img src="pictures\Dairy-cate.jpg" class="card-img-top " alt="..." />
+          <div>
+            <form action="/category/dairy?q=Dairy" method="POST" class="middle">
+              <button id="search" type="submit"><b>Dairy</b></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-3 col catog ">
+          <img src="pictures\fruits-cat.jpeg" class="card-img-top " alt="..." />
+          <div>
+            <form action="/category/fruits?q=Fruit" method="POST" class="middle">
+              <button id="search" type="submit"><b>Fruits</b></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-3 col catog ">
+          <img src="pictures\veg-cate.webp" class="card-img-top " alt="..." />
+          <div>
+            <form action="/category/veg?q=Veggies" method="POST" class="middle">
+              <button id="search" type="submit"><b>Vegetables</b></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-3 col catog ">
+          <img src="pictures\nonveg-cate.jpg" class="card-img-top " alt="..." />
+          <div>
+            <form action="/category/non-veg?q=Non Veg" method="POST" class="middle">
+              <button id="search" type="submit"><b>Non-Veg</b></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <script>
+      const SearchCategories = document.querySelector('#SearchCategories');
+      SearchCategories.addEventListener('click', () => {
+          
+            
+      })
+    </script> -->
+  </body>
+  <footer>
+    <div align=right>
+      <%-include('../ChatBot/index.html')-%>
+    </div>
+  </footer>
+
+  </html>

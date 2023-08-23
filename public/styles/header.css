@@ -1,0 +1,144 @@
+.Sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.navbar-brand {
+  max-width: 20%;
+  max-height: auto;
+}
+.navbar-brand img {
+  max-width: 10vw;
+  max-height: auto;
+}
+form {
+  width: 80%;
+  border-radius: 15px;
+}
+.search-bar {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.search-bar-btn {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-right: 2%;
+}
+.search-bar-btn i {
+  width: 20px;
+  height: auto;
+}
+.profile {
+  color: antiquewhite;
+  text-decoration: none;
+  background-color: transparent;
+}
+.user {
+  width: 50px;
+  height: 50px;
+}
+.offcanvas-end {
+  background-color: #DFDFDF;
+}
+.offcanvas-header .user {
+  width: 69%;
+  height: 69%;
+  left:69px;
+}
+.offcanvas-header button{
+  background-color: green;
+  border-radius: 100px;
+  color: white;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  left: 274px;
+  top: 36px;
+  font-size: xx-large;
+}
+.offcanvas-header button .fa{
+  position: absolute;
+    top: 4px;
+    left: 8px;
+}
+#changeAvatar {
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+}
+#changeAvatar button{
+  border-radius: 100px;
+    background-color: transparent;
+    border: 0px;
+}
+.avatar{
+  width: 70px;
+  height: 70px;
+}
+.offcanvas-body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0vw;
+}
+.offcanvas-body #flip, .cart{
+  height: 55px;
+  background-color:#BCBFBF ;
+  margin-top: 1%;
+  font-size: large;
+  width: 300px;
+  font-weight: 500;
+  left: 1%;
+  width: 400px;
+}
+.offcanvas-body #panel {
+  display: none;
+  width: 100%;
+  text-decoration: none;
+}
+.offcanvas-body #panel .panel{
+  width:100%;
+  height: 55px;
+  font-size: large;
+  font-weight: 500;
+  border-top: 1px solid black;
+  background-color: #99a0a0;
+}
+.offcanvas-body #panel a{
+  color: white;
+  margin-left: 5px;
+  margin-top: 15px;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.footer {
+  position: fixed;
+  bottom: 1%;
+  width: 100%;
+}
+.footer .logout{
+  width: 367px;
+  margin-left: 1rem;
+}
+.label {
+  top: 10%;
+  position: absolute;
+  right: 2.2vw;
+}
+@media (max-width: 1099px) {
+  .nav-item {
+    display: none;
+  }
+  .cartm {
+    display: block;
+  }
+  .navbar-brand {
+    max-width: 30%;
+  }
+  form {
+    width: 70%;
+  }
+  .search-bar {
+    border-radius: 5px;
+  }
+}

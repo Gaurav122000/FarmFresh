@@ -1,0 +1,147 @@
+  .price {
+    font-size: xx-large;
+  }
+  .add-to-cart {
+    margin-bottom: -1%;
+    width: 100%;
+    border-radius: 24px;
+  }
+  .form-control {
+    width: 100%;
+  }
+  .container {
+    margin-top: 1%;
+    min-height: 100%;
+    border: 1px solid black;
+  }
+  .title {
+    font-size: xx-large;
+  }
+  .than {
+    background-color: black;
+  }
+  .carousel-item {
+    /* margin-left: 17%; */
+    padding-right: 17%;
+    object-fit: fill;
+  }
+  /* .carousel-item img {
+    margin-top: 1%;
+    width: 25vw;
+    height: 25vw;
+  } */
+  .reviewtext{
+      border: 2px solid rgb(12, 15, 224);
+      border-radius: 20px;
+      width: 100%;
+  }
+  .post{
+    margin-bottom: 2%;
+  }
+  .checked {
+    color: orange;
+  }
+  .fa-star{
+    font-size: xx-large;
+  }
+#myImg,#myImg1 {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  /* margin-left: 7%; */
+  margin-left: 17%;
+  max-width: 70vw;
+  max-height: 36vw;
+}
+
+#myImg:hover ,#myImg1:hover
+{opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(247, 242, 242); /* Fallback color */
+  background-color: rgba(255, 251, 251, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin-left: 25%;
+  display: block;
+
+}
+/* Add Animation */
+.modal-content{  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+#img01 ,#img02{
+  max-width:60vw;
+  max-height: 53vw;
+  left: -2vw;
+}
+
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 70px;
+  right: 9px;
+  color: #1f1e1e;
+  font-size: 60px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+@media (max-width:1000px){
+  #myImg,#myImg1{
+    max-width: fit-content;
+    max-height: fit-content;
+    margin-left: 1px;
+  }
+  #img02, #img01{
+    max-width:77vw;
+    left: -10vw;
+  }
+}
+@media (max-width: 576px) {
+  .carousel-item img {
+    margin-top: 1%;
+    width: 100%;
+    height: 40vw;
+    margin-left: 15%;
+  }
+  #img02, #img01{
+   left: -1vw;
+  }
+  .carousel-item {
+  object-fit: fill;
+  /* margin-left: 8.5%; */
+}
+}
