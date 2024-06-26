@@ -1,7 +1,7 @@
 # FarmFresh
 
 ## Screen Shorts
-# Home Page
+### Home Page
 Home Page SlideShow
 ![f1](https://github.com/Gaurav122000/FarmFresh/assets/100744516/78ed488b-4a1f-42d3-a658-cded66258468)
 Home Page Best Deal
